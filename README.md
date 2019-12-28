@@ -1,2 +1,2 @@
 # Recepie-Recommender
-An explainable recepie recommendtion system based.
+An explainable recipe recommendation system based.
