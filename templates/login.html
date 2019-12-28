@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block body %}
+
+
+<div class="uk-flex uk-flex-middle uk-margin-large-top uk-background-muted">
+	<div class="uk-card uk-card-hover uk-align-center uk-width-1-2">
+		<div class="uk-card-header uk-card-secondary">
+			<h3 class="uk-card-title"> Login </h3> 
+		</div>
+		<div class="uk-card-body">
+			<form method="post">
+			        <label for="username">Username</label><br>
+			        <input name="username" id="username" required/><br>
+			        <label for="password">Password</label><br>
+			        <input type="password" name="password" id="password" required/><br>
+			        <p uk->
+			        <button class="uk-button uk-button-secondary" type="submit" >Log In</button>
+				    </p>
+			</form>
+			<span class="uk-label uk-label-warning">{{Warning}}</span>
+
+		</div>
+		</div>
+	</div>
+
+ {% endblock body %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CONCOCT</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/uikit.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/uikit-rtl.css') }}">
+
+<script type="text/javascript" src="{{ url_for('static',filename='js/uikit.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/uikit-icons.js') }}">
+</script>
+</head>
+<body>
+        <nav class="uk-navbar-container uk-padding uk-background-muted" uk-navbar style="position: relative; z-index: 980;">
+                <div class="uk-navbar">
+                <h1 class="uk-text-secondary uk-text-bolder">CONCOCT</h1>
+                </div>
+
+                <div class="uk-navbar-right">
+                  <ul class="uk-navbar-nav uk-margin-right">
+                  {% if g.user %}
+                    <li><span>{{ g.user['username'] }}</span></li>
+                    <li><a class="uk-icon-small-right" uk-icon="sign-out" href="{{ url_for('index') }}">Log Out</a></li>
+                  {% else %}
+                    <li><a class="uk-icon-small-right" uk-icon="user" href="{{ url_for('register') }}">Register</a></li>
+                    <li><a class="uk-icon-small-right" uk-icon="sign-in" href="{{ url_for('index') }}">Log In</a></li>
+                  {% endif %}
+                </ul>
+                </div>
+        </nav>
+{% block body %}{% endblock %}
+</body>
+</html>

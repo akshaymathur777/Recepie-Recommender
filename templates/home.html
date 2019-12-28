@@ -1,0 +1,135 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+<div class="uk-card-container">
+	<div class="uk-card-header">
+		<h3 class="uk-card-title uk-text-muted">  </h3> 
+		</div>
+
+		<div class="uk-margin-large-left uk-margin-large-right uk-card-body">
+		<ul uk-tab>
+			<li><a href="#"> Recipes</a></li>
+			<li><a href="#"> Ingredients</a></li>
+			<li><a href="#"> User Attributes</a></li>
+			<li><a href="#"> Shopping Cart</a></li>
+		</ul>
+
+
+
+		<!-- Recipes -->
+
+
+		<ul class="uk-switcher uk-align-center">
+			<li class="uk-background-muted uk-padding">
+				<div class="uk-width-1-1 uk-padding uk-background-muted uk-align-center uk-card uk-card-hover ">
+
+					<form method="post" action = "/home">
+				    <label for="ingredients">Enter Ingredients</label><br>
+				    <input name="ingredients" style="width:800px;" id="ingredients" required>
+				    <button class="uk-icon-small-left" uk-icon="search" type="submit"></button>
+				  </form>
+						{% for dish,recipie in recipies.items() %}
+				  		{% with id = dish %}
+				  		<div class="uk-card uk-card-hover uk-background-muted uk-padding">
+					  		<div class="uk-text-large uk-text-bolder uk-card-title">{{dish}}
+						  		<div class="uk-align-right">
+						  			<a href="/upvote?dish={{dish}}" class="uk-icon-link" uk-icon="check" onclick=liked()>&nbsp;&nbsp;</a>
+						  			<a href="/upvote?dish={{dish}}" class="uk-icon-link" uk-icon="close" onclick=disliked()>&nbsp;&nbsp;</a>
+							  	</div>
+							  	<p class = "uk-text-muted">{{score[id]}}</p>
+						  
+							  </div>
+
+							  	
+							      <p class="uk-text-normal">{{recipie}}</p>
+						</div>
+						{% endwith %}
+						{% endfor %}
+				</div>
+			</li>
+
+
+		<!-- Ingredients -->
+
+
+			<li class="uk-background-muted uk-padding">
+				<div class="uk-width-1-1 uk-padding uk-background-muted uk-align-center uk-card uk-card-hover">
+					<h2 class="uk-text-bold">List of ingredients that we assume you have:</h2>
+					{% with ings=ing %}
+					{% for i in ings.split(",") %}
+					<ul>
+					<li class="uk-text-normal">{{i}}</li>
+					</ul>
+					{% endfor %}
+					{% endwith %}
+				</div>
+			</li>
+
+
+
+		<!-- User Atrributes -->
+
+
+			<li class="uk-background-muted uk-padding">
+				<div class="uk-width-1-1 uk-padding uk-background-muted uk-align-center uk-card uk-card-hover">
+					
+					<h2 class="uk-text-bold">User Attribute Table:</h2>
+					<table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+					        <thead>
+					            <tr>
+					                <th class="uk-table-small">Score</th>
+					                <th class="uk-table-small"></th>
+				                </tr>
+			                </thead>
+			                <tbody>
+		                		{% with pre=prefer %}
+								{% for key,score in pre.items() %}
+								<tr>
+			                		<td class="uk-text-truncate">{{key}}</td>
+			                		<td class="uk-text-truncate">{{score}}</td>
+			                	</tr>
+        						{% endfor %}
+								{% endwith %}
+			                </tbody>
+	                </table>
+				</div>
+			</li>
+
+
+
+		<!-- Shopping Cart -->
+
+
+			<li class="uk-background-muted uk-padding">
+				<div class="uk-width-1-1 uk-padding uk-background-muted uk-align-center uk-card uk-card-hover">
+					<H2> Shopping Cart </H2>
+
+					{% for key, value in shopping.items() %}
+					<div class="uk-card uk-card-hover uk-background-muted uk-padding">
+						
+						<div class="uk-text-bold">{{key}}</div>
+						<p class = uk-text-normal>{{value}}</p>
+						
+					</div>
+					{% endfor %}
+
+
+				</div>
+			</li>
+		</ul>
+
+
+	</div>
+ </div>
+
+<script type="text/javascript">
+	function liked(){
+		alert("Liked recipe");
+	}
+	function dislikd(){
+		alert("Disliked recipe")
+	}
+</script>
+
+{% endblock body %}
